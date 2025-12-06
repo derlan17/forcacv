@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Interativo: Jogo da Forca</title>
+    <!-- Carregamento do Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração da fonte Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Cores Dark Mode Otimizadas */
+        :root {
+            --color-primary: #3B82F6; /* Azul Principal (blue-500) */
+            --color-secondary: #60A5FA; /* Azul Claro (blue-400) - Acento/Destaque */
+            --color-background: #0F172A; /* Slate-900 - Fundo Profundo */
+            --color-card-bg: #1E293B; /* Slate-800 - Fundo do Cartão */
+            --color-text-light: #F8FAFC; /* Branco Suave (slate-50) */
+            --color-text-muted: #94A3B8; /* Cinza Suave (slate-400) */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background); 
+            color: var(--color-text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        .card {
+            background-color: var(--color-card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Garante que o texto dentro do card use a cor principal de texto */
+            color: var(--color-text-muted); 
+        }
+        .card-unlocked {
+            border-left: 8px solid var(--color-secondary); /* Azul claro como borda de desbloqueio */
+            animation: bounceIn 0.8s;
+        }
+        /* Estilos dos Botões Primários */
+        .btn-primary {
+            @apply px-4 py-2 font-semibold rounded-lg transition duration-300 ease-in-out shadow-lg;
+            background-color: var(--color-primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB; /* blue-600 */
+        }
+        /* Estilos do Input do Jogo */
+        .input-letter {
+            @apply w-12 h-12 text-2xl text-center uppercase border-2 rounded-lg font-bold;
+            background-color: #1E293B; /* slate-800 */
+            border-color: #475569; /* slate-600 */
+            color: var(--color-secondary);
+        }
+        /* Estilos do Canvas/SVG do Jogo da Forca */
+        .hangman-stage {
+            stroke: var(--color-text-light); /* Estrutura em branco */
+            stroke-width: 4;
+            fill: none;
+        }
+        .hangman-part {
+            /* Partes do boneco em azul claro para destacar */
+            fill: none; 
+            stroke: var(--color-secondary); 
+            stroke-width: 4;
+            stroke-linecap: round; /* Para aparência mais suave */
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        .btn-cv {
+            /* Botão Download CV */
+            @apply bg-blue-400 hover:bg-blue-500 text-gray-900 font-bold py-2 px-4 rounded-xl transition duration-300 shadow-md;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header class="text-center mb-10 max-w-2xl w-full">
+        <h1 class="text-4xl font-extrabold text-blue-400 mb-2">CURRÍCULO DA FORCA</h1> 
+        <p class="text-gray-400">Desvende as palavras-chave para aceder ao meu perfil profissional.</p>
+        <p class="text-sm text-blue-300 mt-1">10 Tentativas por secção. Se falhar, tem de recomeçar a secção!</p>
+    </header>
+
+    <div id="curriculum-container" class="space-y-8 w-full max-w-4xl">
+        
+        <!-- SECÇÃO 0: INFORMAÇÃO PESSOAL (ABERTA) -->
+        <div id="section-0" class="card p-6 card-unlocked">
+            <h2 class="text-2xl font-bold mb-4 text-blue-400">0. Informação Pessoal (Aberto)</h2>
+            <div class="space-y-4 text-gray-300">
+                <div class="mt-4 flex flex-col items-center justify-center space-y-4">
+                    <!-- Placeholder de Imagem para compatibilidade com o ambiente -->
+                    <img src="https://placehold.co/112x112/1E293B/60A5FA?text=D.N" alt="Foto Profissional de Derlan" class="w-28 h-28 rounded-full border-4 border-blue-400 object-cover">
+                    <a href="#" download="CV_Derlan_Nascimento.pdf" class="btn-cv flex items-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.707-9.293a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 7.414V13a1 1 0 11-2 0V7.414L6.707 8.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        <span>Download CV (PDF)</span>
+                    </a>
+                </div>
+
+                <p><strong>Nome:</strong> Derlan Santos do Nascimento </p>
+                <p><strong>Contacto:</strong> (+351) 935 824 964 | derlan17@gmail.com </p>
+                <p><strong>Localização:</strong> Aveiro, Portugal</p>
+                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/derlan-santos-do-nascimento-938a39112/" target="_blank" class="text-blue-400 hover:underline">Perfil LinkedIn</a></p>
+            </div>
+        </div>
+
+        <!-- SECÇÃO 1: SOBRE MIM -->
+        <div id="section-1" class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 text-blue-400">1. Sobre Mim</h2>
+            <div id="content-1" class="hidden space-y-4 text-gray-300">
+                <p>Estou em busca da minha primeira oportunidade profissional para aplicar e expandir meus conhecimentos teóricos de **programação**. Possuo uma base em: lógica de programação, estruturas de dados e proficiência em **Python** e **Java Script**.</p>
+                <p>Tenho fácil aprendizado, com excelente capacidade de resolução de problemas e grande entusiasmo em contribuir para o ciclo de vida completo de desenvolvimento de sistemas de informação.</p>
+            </div>
+            <div id="game-1" class="game-area"></div>
+        </div>
+
+        <!-- SECÇÃO 2: ESCOLARIDADE -->
+        <div id="section-2" class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 text-blue-400">2. Escolaridade</h2>
+            <div id="content-2" class="hidden space-y-4 text-gray-300">
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li>**Técnico Superior Profissional em Programação de Sistema de Informação** (ESTGA, Universidade de Aveiro - Atualmente)</li>
+                    <li>**Engenheiro Civil** (Graduado em 2021) e Pós-Graduação em Gestão de Obras.</li>
+                    <li>**Administração de Empresas** (Graduado em 2010).</li>
+                </ul>
+            </div>
+            <div id="game-2" class="game-area"></div>
+        </div>
+
+        <!-- SECÇÃO 3: EXPERIÊNCIA PROFISSIONAL -->
+        <div id="section-3" class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 text-blue-400">3. Experiência Profissional</h2>
+            <div id="content-3" class="hidden space-y-4 text-gray-300">
+                <p>Mais de 17 anos de experiência em diferentes setores, focando em gestão e liderança:</p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li>**Engenheiro Civil** (Construtora Paulista, DSN Engenharia, Ivan Construções) - Responsável por orçamentos, fiscalização, leitura de projetos e gestão de compras.</li>
+                </ul>
+            </div>
+            <div id="game-3" class="game-area"></div>
+        </div>
+
+        <!-- SECÇÃO 4: COMPETÊNCIAS DIGITAIS -->
+        <div id="section-4" class="card p-6">
+            <h2 class="text-2xl font-bold mb-4 text-blue-400">4. Competências Digitais</h2>
+            <div id="content-4" class="hidden space-y-4 text-gray-300">
+                <p>Conhecimento prático em ferramentas e linguagens:</p>
+                <p class="text-blue-400 font-bold text-lg">**Python** | **Java Script** | **Revit** | **Autocad** | **MS Project**</p>
+                <p>Além de proficiência em Microsoft Office e Google Workspace.</p>
+            </div>
+            <div id="game-4" class="game-area"></div>
+        </div>
+
+    </div>
+
+    <!-- Modal para mensagens do jogo -->
+    <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+        <div class="bg-slate-800 p-8 rounded-xl text-center max-w-md w-full shadow-2xl border-t-4 border-blue-400">
+            <h3 id="modal-title" class="text-3xl font-extrabold mb-4 text-blue-400"></h3>
+            <p id="modal-message" class="text-gray-300 mb-6"></p>
+            <button id="modal-close-btn" class="btn-primary" onclick="closeModal()">Continuar</button>
+        </div>
+    </div>
+
+    <script>
+        // --- FUNÇÃO DE NORMALIZAÇÃO PARA TRATAR ACENTOS ---
+        function normalizeString(str) {
+            return str
+                .toUpperCase()
+                .normalize("NFD") 
+                .replace(/[\u0300-\u036f]/g, "") 
+                .replace(/Ç/g, 'C'); 
+        }
+        
+        // --- DADOS DO JOGO ---
+        const curriculumData = [
+            {
+                id: 1,
+                keyword: "PROGRAMACAO", 
+                sectionId: "section-1",
+                contentId: "content-1",
+                tries: 10,
+                guessedLetters: new Set(),
+                isUnlocked: false
+            },
+            {
+                id: 2,
+                keyword: "UNIVERSIDADE", 
+                sectionId: "section-2",
+                contentId: "content-2",
+                tries: 10,
+                guessedLetters: new Set(),
+                isUnlocked: false
+            },
+            {
+                id: 3,
+                keyword: "ENGENHARIA", 
+                sectionId: "section-3",
+                contentId: "content-3",
+                tries: 10,
+                guessedLetters: new Set(),
+                isUnlocked: false
+            },
+            {
+                id: 4,
+                keyword: "PYTHON", 
+                sectionId: "section-4",
+                contentId: "content-4",
+                tries: 10,
+                guessedLetters: new Set(),
+                isUnlocked: false
+            }
+        ];
+
+        let currentGame = null; 
+
+        // --- FUNÇÕES DE LÓGICA DO JOGO ---
+
+        /** Inicializa ou reinicia o jogo para uma dada secção. */
+        function initializeGame(gameData) {
+            currentGame = gameData.id;
+            gameData.guessedLetters = new Set();
+            gameData.tries = 10;
+            renderGame(gameData);
+        }
+
+        /** Renderiza o estado atual do jogo da forca (display da palavra, tentativas e forca). */
+        function renderGame(gameData) {
+            const gameArea = document.getElementById(`game-${gameData.id}`);
+            if (gameData.isUnlocked) {
+                gameArea.innerHTML = '';
+                return;
+            }
+
+            const keywordDisplay = getKeywordDisplay(gameData);
+            const guessedLettersDisplay = Array.from(gameData.guessedLetters).sort().join(', ');
+
+            gameArea.innerHTML = `
+                <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-8 p-4 border border-gray-700 rounded-xl bg-slate-900">
+                    <div class="flex-shrink-0">
+                        <!-- Canvas SVG da Forca -->
+                        <svg id="hangman-canvas-${gameData.id}" width="150" height="200" viewBox="0 0 150 200" class="border border-gray-600 rounded-lg bg-gray-800">
+                            <!-- Estrutura da Forca -->
+                            <line class="hangman-stage" x1="10" y1="190" x2="140" y2="190"/>
+                            <line class="hangman-stage" x1="30" y1="190" x2="30" y2="10"/>
+                            <line class="hangman-stage" x1="30" y1="10" x2="110" y2="10"/>
+                            <line class="hangman-stage" x1="110" y1="10" x2="110" y2="30"/>
+                            <!-- Desenha as partes do boneco baseadas nas tentativas falhadas -->
+                            ${drawHangmanParts(10 - gameData.tries)}
+                        </svg>
+                    </div>
+
+                    <div class="flex-grow space-y-4 w-full">
+                        <p class="text-xl font-mono tracking-widest p-3 bg-gray-800 rounded-lg text-blue-400 text-center shadow-inner">${keywordDisplay}</p>
+                        <p class="text-lg text-gray-300">Tentativas Restantes: <span class="font-bold text-blue-400">${gameData.tries}</span></p>
+                        <p class="text-sm text-gray-400">Letras Tentadas: <span class="font-mono">${guessedLettersDisplay || 'Nenhuma'}</span></p>
+
+                        <div class="flex space-x-2 pt-2">
+                            <input type="text" id="guess-input-${gameData.id}" maxlength="1" class="input-letter" placeholder="A" onkeyup="if(event.key === 'Enter') checkGuess(${gameData.id})">
+                            <button onclick="checkGuess(${gameData.id})" class="btn-primary flex-grow">Adivinhar Letra</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            // Foca no input
+            document.getElementById(`guess-input-${gameData.id}`)?.focus();
+        }
+
+        /** Gera o código SVG para as partes do boneco da forca. */
+        function drawHangmanParts(errors) {
+            let svg = '';
+            
+            // 1. Cabeça (Circle: cx=110, cy=50, r=20)
+            if (errors >= 1) svg += `<circle class="hangman-part" cx="110" cy="50" r="20" stroke-width="2"/>`; // Reduzida espessura para cabeça
+            // 2. Corpo (Line: x1=110, y1=70, x2=110, y2=130)
+            if (errors >= 2) svg += `<line class="hangman-part" x1="110" y1="70" x2="110" y2="130"/>`;
+            // 3. Braço Esquerdo (Line: x1=110, y1=80, x2=80, y2=110)
+            if (errors >= 3) svg += `<line class="hangman-part" x1="110" y1="80" x2="80" y2="110"/>`;
+            // 4. Braço Direito (Line: x1=110, y1=80, x2=140, y2=110)
+            if (errors >= 4) svg += `<line class="hangman-part" x1="110" y1="80" x2="140" y2="110"/>`;
+            // 5. Perna Esquerda (Line: x1=110, y1=130, x2=80, y2=160)
+            if (errors >= 5) svg += `<line class="hangman-part" x1="110" y1="130" x2="80" y2="160"/>`;
+            // 6. Perna Direita (Line: x1=110, y1=130, x2=140, y2=160)
+            if (errors >= 6) svg += `<line class="hangman-part" x1="110" y1="130" x2="140" y2="160"/>`;
+            
+            // 7. Olho Esquerdo (Linha: X)
+            if (errors >= 7) svg += `<line class="hangman-part" x1="100" y1="40" x2="105" y2="45" stroke-width="2"/> <line class="hangman-part" x1="100" y1="45" x2="105" y2="40" stroke-width="2"/>`;
+            // 8. Olho Direito (Linha: X)
+            if (errors >= 8) svg += `<line class="hangman-part" x1="115" y1="40" x2="120" y2="45" stroke-width="2"/> <line class="hangman-part" x1="115" y1="45" x2="120" y2="40" stroke-width="2"/>`;
+            // 9. Nariz
+            if (errors >= 9) svg += `<line class="hangman-part" x1="110" y1="50" x2="110" y2="55" stroke-width="2"/>`;
+            // 10. Boca (Linha reta para morte)
+            if (errors >= 10) svg += `<line class="hangman-part" x1="105" y1="60" x2="115" y2="60" stroke-width="2"/>`;
+            
+            return svg;
+        }
+
+
+        /** Retorna a string da palavra-chave com as letras adivinhadas visíveis. */
+        function getKeywordDisplay(gameData) {
+            let display = '';
+            for (const letter of gameData.keyword) {
+                if (gameData.guessedLetters.has(letter)) {
+                    display += letter + ' ';
+                } else {
+                    display += '_ ';
+                }
+            }
+            return display.trim();
+        }
+
+        /** Verifica se a letra adivinhada está correta e atualiza o estado do jogo. */
+        function checkGuess(id) {
+            const gameData = curriculumData.find(g => g.id === id);
+            if (!gameData || gameData.isUnlocked || gameData.tries === 0) return;
+
+            const inputElement = document.getElementById(`guess-input-${id}`);
+            let guess = inputElement.value.toUpperCase().trim();
+            inputElement.value = ''; 
+            inputElement.focus();
+
+            // 1. Normaliza o input do utilizador para remover acentos
+            let normalizedGuess = normalizeString(guess);
+
+            if (!normalizedGuess || normalizedGuess.length !== 1 || !/^[A-Z]$/.test(normalizedGuess)) {
+                // Permite a entrada, mas notifica se não for uma única letra
+                showModal('Aviso', 'Por favor, insira apenas uma letra válida (A-Z).', 'Entendi');
+                return;
+            }
+
+            // 2. Usamos a versão normalizada para verificar e adicionar
+            if (gameData.guessedLetters.has(normalizedGuess)) {
+                showModal('Aviso', `A letra "${guess}" já foi tentada.`, 'Entendi');
+                return;
+            }
+
+            gameData.guessedLetters.add(normalizedGuess);
+
+            if (gameData.keyword.includes(normalizedGuess)) {
+                if (getKeywordDisplay(gameData).replace(/\s/g, '') === gameData.keyword) {
+                    unlockSection(gameData);
+                } else {
+                    renderGame(gameData);
+                }
+            } else {
+                gameData.tries--;
+                renderGame(gameData);
+
+                if (gameData.tries === 0) {
+                    showModal(
+                        'FIM DE JOGO!', 
+                        `A palavra-chave era **${gameData.keyword}**. O boneco foi enforcado!`, 
+                        'Tentar Novamente', 
+                        () => initializeGame(gameData)
+                    );
+                }
+            }
+        }
+
+        /** Desbloqueia a secção atual, revela o conteúdo e inicializa a próxima secção. */
+        function unlockSection(gameData) {
+            gameData.isUnlocked = true;
+            document.getElementById(gameData.sectionId).classList.add('card-unlocked');
+            document.getElementById(gameData.contentId).classList.remove('hidden');
+            
+            // Remove a área do jogo, se necessário (embora renderGame já faça isso)
+            document.getElementById(`game-${gameData.id}`).innerHTML = `
+                <p class="text-green-400 font-bold text-lg text-center p-3 bg-green-900/50 rounded-lg">DESBLOQUEADO: Palavra-chave Correta!</p>
+            `;
+
+            let nextSectionId = gameData.id < curriculumData.length ? gameData.id + 1 : null;
+            let title = 'SECÇÃO DESBLOQUEADA!';
+            let message = `Parabéns! Acedeu à secção **${gameData.id}**.`;
+            let buttonText = 'Continuar';
+
+            if (nextSectionId) {
+                const nextGameData = curriculumData.find(g => g.id === nextSectionId);
+                initializeGame(nextGameData); 
+            } else {
+                title = 'CV COMPLETO!';
+                message = 'Parabéns! Desbloqueou todo o meu currículo. O desafio foi concluído com sucesso!';
+                buttonText = 'Encerrar';
+            }
+
+            showModal(title, message, buttonText);
+        }
+
+        // --- FUNÇÕES DE INTERFACE (MODAL) ---
+
+        const modalElement = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        /** Exibe o modal com a mensagem e ação de fecho. */
+        function showModal(title, message, buttonLabel = 'Fechar', callback = null) {
+            modalTitle.innerHTML = title;
+            modalMessage.innerHTML = message;
+            modalCloseBtn.textContent = buttonLabel;
+
+            modalCloseBtn.onclick = () => {
+                closeModal();
+                // Atraso para garantir que a transição do modal termine antes do callback
+                setTimeout(() => {
+                    if (callback) callback();
+                }, 100); 
+            };
+
+            modalElement.classList.remove('hidden');
+        }
+
+        /** Oculta o modal. */
+        function closeModal() {
+            modalElement.classList.add('hidden');
+        }
+
+        // --- INICIALIZAÇÃO ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa a primeira secção de jogo.
+            initializeGame(curriculumData[0]);
+        });
+    </script>
+</body>
+</html>
